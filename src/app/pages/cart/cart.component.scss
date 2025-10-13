@@ -12,7 +12,6 @@
   color: #333;
 }
 
-// Empty cart state
 .empty-cart {
   display: flex;
   flex-direction: column;
@@ -42,7 +41,6 @@
   }
 }
 
-// Cart list
 .cart-list {
   padding: 0;
   
@@ -127,7 +125,6 @@ mat-divider {
   margin: 0;
 }
 
-// Cart summary
 .cart-summary {
   position: sticky;
   bottom: 0;
@@ -172,7 +169,6 @@ mat-divider {
   }
 }
 
-// Responsive adjustments
 @media (max-width: 600px) {
   .cart-container {
     padding: 16px;

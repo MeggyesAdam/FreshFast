@@ -30,8 +30,8 @@ import { User } from '../../models/user-interface';
     MatDividerModule,
     MatIconModule,
     MatListModule,
-    MatSnackBarModule
-  ],
+    MatSnackBarModule,
+],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss'
 })
@@ -61,47 +61,16 @@ export class CheckoutComponent implements OnInit {
     this.addressFormGroup = this.formBuilder.group({
       street: [this.user?.address?.street || '', Validators.required],
       city: [this.user?.address?.city || '', Validators.required],
-      postalCode: [this.user?.address?.postalCode || '', [Validators.required, Validators.pattern(/^\d{4}$/)]],
+      postalCode: [this.user?.address?.postalCode || '', [Validators.required]],
       county: [this.user?.address?.county || '', Validators.required],
       phone: ['', [Validators.required, Validators.pattern(/^(\+36|06)[0-9]{9}$/)]],
       additionalInfo: ['']
     });
 
     this.paymentFormGroup = this.formBuilder.group({
-      paymentMethod: ['card', Validators.required],
-      cardNumber: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
-      cardName: ['', Validators.required],
-      expiryDate: ['', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)]],
-      cvv: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]]
+      paymentMethod: ['cash', Validators.required],
     });
 
-    this.paymentFormGroup.get('paymentMethod')?.valueChanges.subscribe(method => {
-      this.updatePaymentValidation(method);
-    });
-  }
-
-  updatePaymentValidation(method: string): void {
-    const cardNumber = this.paymentFormGroup.get('cardNumber');
-    const cardName = this.paymentFormGroup.get('cardName');
-    const expiryDate = this.paymentFormGroup.get('expiryDate');
-    const cvv = this.paymentFormGroup.get('cvv');
-
-    if (method === 'cash') {
-      cardNumber?.clearValidators();
-      cardName?.clearValidators();
-      expiryDate?.clearValidators();
-      cvv?.clearValidators();
-    } else {
-      cardNumber?.setValidators([Validators.required, Validators.pattern(/^\d{16}$/)]);
-      cardName?.setValidators([Validators.required]);
-      expiryDate?.setValidators([Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)]);
-      cvv?.setValidators([Validators.required, Validators.pattern(/^\d{3}$/)]);
-    }
-
-    cardNumber?.updateValueAndValidity();
-    cardName?.updateValueAndValidity();
-    expiryDate?.updateValueAndValidity();
-    cvv?.updateValueAndValidity();
   }
 
   getSubtotal(): number {
@@ -119,12 +88,8 @@ export class CheckoutComponent implements OnInit {
   placeOrder(): void {
     if (this.addressFormGroup.valid && this.paymentFormGroup.valid) {
       this.snackBar.open('Rendelés sikeresen leadva!', 'Bezárás', { duration: 5000 });
-      
       this.dataService.clearCart();
-      
-      setTimeout(() => {
-        this.router.navigate(['/main']);
-      }, 2000);
+      this.router.navigate(['/main']);
     } else {
       this.snackBar.open('Kérjük, töltsd ki az összes kötelező mezőt', 'Bezárás', { duration: 3000 });
     }

@@ -6,7 +6,7 @@
 
     <div class="content-wrapper">
         <div class="image-section">
-            <img src="hamburger.jpg" alt="{{ dish?.name }}">
+            <img src="{{ dish?.imageUrl }}" alt="{{ dish?.name }}">
             <span class="category-badge">{{ dish?.category }}</span>
         </div>
 
@@ -17,7 +17,7 @@
             <div class="info-row">
                 <div class="info-item">
                     <mat-icon>local_fire_department</mat-icon>
-                    <span>{{ dish?.calories }} calories</span>
+                    <span>{{ dish?.calories }} kcal</span>
                 </div>
             </div>
 

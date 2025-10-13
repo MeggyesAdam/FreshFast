@@ -1,7 +1,7 @@
 @if (dish) {
     <mat-card (click)="onCardClick()" matRipple>
         <div class="image-container">
-            <img src="hamburger.jpg" alt="Hamburger">
+            <img src="{{ dish.imageUrl }}" alt="{{ dish.name }}">
             <span class="category-badge">{{ dish.category }}</span>
         </div>
         <mat-card-header>

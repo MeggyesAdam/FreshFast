@@ -39,10 +39,14 @@
 }
 
 .stepper-section {
-  background: white;
+  background: white !important;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 2rem;
+
+  mat-stepper {
+    background: transparent;
+  }
 
   @media (max-width: 768px) {
     padding: 1rem;
@@ -51,6 +55,7 @@
 
 .step-content {
   padding: 1.5rem 0;
+  background-color: white !important;
 
   h2 {
     margin: 0 0 1.5rem 0;
@@ -249,6 +254,7 @@
 
   mat-card {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: white !important;
 
     mat-card-header {
       margin-bottom: 1rem;
@@ -355,4 +361,19 @@ mat-list {
 
 .step-content {
   animation: fadeIn 0.3s ease-in-out;
+}
+
+.next-button {
+  background-color: black !important;
+  color: white !important;
+
+  &:hover {
+    background-color: #2e2e2e !important;
+  }
+
+  &:disabled {
+    background-color: #cccccc !important;
+    color: #666666 !important;
+    cursor: not-allowed;
+  }
 }

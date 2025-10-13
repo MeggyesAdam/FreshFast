@@ -18,7 +18,7 @@ export class DataService {
       allergens: ['Glutén'],
       price: 1499,
       category: DishCategory.Soups,
-      imageUrl: "",
+      imageUrl: "/img/gulyasleves.png",
       ingredients: ['Marhahús', 'Burgonya', 'Paprika', 'Hagyma', 'Paradicsom', 'Fokhagyma', 'Pirospaprika', 'Só', 'Bors']
     },
     {
@@ -29,7 +29,7 @@ export class DataService {
       allergens: ['Glutén', 'Tojás'],
       price: 1299,
       category: DishCategory.Soups,
-      imageUrl: "",
+      imageUrl: "/img/husleves.png",
       ingredients: ['Csirkehús', 'Sárgarépa', 'Zeller', 'Petrezselyem', 'Hagyma', 'Cérnametélt', 'Só', 'Bors']
     },
     {
@@ -40,7 +40,7 @@ export class DataService {
       allergens: ['Glutén', 'Laktóz'],
       price: 2499,
       category: DishCategory.MainCourses,
-      imageUrl: "",
+      imageUrl: "/img/hamburger.jpg",
       ingredients: ['Marhahús pogácsa', 'Hamburger buci', 'Saláta', 'Paradicsom', 'Sajt', 'Hagyma', 'Uborka', 'Majonéz', 'Ketchup']
     },
     {
@@ -51,7 +51,7 @@ export class DataService {
       allergens: ['Laktóz'],
       price: 2899,
       category: DishCategory.MainCourses,
-      imageUrl: "",
+      imageUrl: "/img/grillcsirke.png",
       ingredients: ['Csirkemell', 'Cukkini', 'Paprika', 'Brokkoli', 'Tejszín', 'Fokhagyma', 'Olívaolaj', 'Só', 'Bors']
     },
     {
@@ -62,7 +62,7 @@ export class DataService {
       allergens: ['Glutén', 'Laktóz'],
       price: 2199,
       category: DishCategory.MainCourses,
-      imageUrl: "",
+      imageUrl: "/img/bolognai.png",
       ingredients: ['Spagetti', 'Darált marhahús', 'Paradicsom szósz', 'Hagyma', 'Fokhagyma', 'Parmezán', 'Olívaolaj', 'Bazsalikom']
     },
     {
@@ -73,7 +73,7 @@ export class DataService {
       allergens: ['Szezámmag'],
       price: 2399,
       category: DishCategory.MainCourses,
-      imageUrl: "",
+      imageUrl: "/img/veganbuddha.png",
       ingredients: ['Quinoa', 'Édesburgonya', 'Csicseriborsó', 'Avokádó', 'Spenót', 'Paradicsom', 'Tahini', 'Citrom', 'Fűszerek']
     },
     {
@@ -84,7 +84,7 @@ export class DataService {
       allergens: ['Glutén', 'Laktóz', 'Tojás'],
       price: 1299,
       category: DishCategory.Desserts,
-      imageUrl: "",
+      imageUrl: "/img/tiramisu.png",
       ingredients: ['Babapiskóta', 'Mascarpone', 'Tojás', 'Cukor', 'Espresso', 'Kakaópor', 'Marsala']
     },
     {
@@ -95,7 +95,7 @@ export class DataService {
       allergens: ['Glutén', 'Laktóz', 'Tojás', 'Diófélék'],
       price: 1399,
       category: DishCategory.Desserts,
-      imageUrl: "",
+      imageUrl: "/img/somloi.png",
       ingredients: ['Piskóta', 'Dió', 'Csokoládé', 'Mazsola', 'Rum', 'Tejszínhab', 'Vanília', 'Cukor']
     },
     {
@@ -106,7 +106,7 @@ export class DataService {
       allergens: [],
       price: 799,
       category: DishCategory.Drinks,
-      imageUrl: "",
+      imageUrl: "/img/narancsle.png",
       ingredients: ['Friss narancs']
     },
     {
@@ -117,7 +117,7 @@ export class DataService {
       allergens: [],
       price: 699,
       category: DishCategory.Drinks,
-      imageUrl: "",
+      imageUrl: "/img/limonade.png",
       ingredients: ['Citrom', 'Víz', 'Méz', 'Menta', 'Jég']
     },
   ];
