@@ -1,0 +1,105 @@
+<div class="user-profile-dialog">
+  <div class="dialog-header">
+    <h2 mat-dialog-title>Felhasználói profil</h2>
+    <button mat-icon-button class="close-button" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content>
+    <mat-tab-group>
+      <mat-tab label="E-mail">
+        <div class="tab-content">
+          <h3>E-mail cím frissítése</h3>
+          <form #emailForm="ngForm" (ngSubmit)="saveEmail()">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>E-mail cím</mat-label>
+              <input 
+                matInput 
+                type="email" 
+                [(ngModel)]="email" 
+                name="email" 
+                required 
+                email
+                placeholder="pelda@email.hu">
+              <mat-icon matPrefix>email</mat-icon>
+            </mat-form-field>
+
+            <div class="button-row">
+              <button 
+                mat-raised-button 
+                color="primary" 
+                type="submit"
+                [disabled]="!emailForm.valid || !email.trim()">
+                E-mail mentése
+              </button>
+            </div>
+          </form>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Cím">
+        <div class="tab-content">
+          <h3>Lakcím mentése</h3>
+          <form #addressForm="ngForm" (ngSubmit)="saveAddress()">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Utca és házszám</mat-label>
+              <input 
+                matInput 
+                [(ngModel)]="street" 
+                name="street" 
+                required
+                placeholder="Fő utca 123">
+              <mat-icon matPrefix>home</mat-icon>
+            </mat-form-field>
+
+            <div class="form-row">
+              <mat-form-field appearance="outline" class="half-width">
+                <mat-label>Város</mat-label>
+                <input 
+                  matInput 
+                  [(ngModel)]="city" 
+                  name="city" 
+                  required
+                  placeholder="Budapest">
+                <mat-icon matPrefix>location_city</mat-icon>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="half-width">
+                <mat-label>Irányítószám</mat-label>
+                <input 
+                  matInput 
+                  [(ngModel)]="postalCode" 
+                  name="postalCode" 
+                  required
+                  placeholder="1234">
+                <mat-icon matPrefix>markunread_mailbox</mat-icon>
+              </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Megye</mat-label>
+              <input 
+                matInput 
+                [(ngModel)]="county" 
+                name="county" 
+                required
+                placeholder="Pest megye">
+              <mat-icon matPrefix>map</mat-icon>
+            </mat-form-field>
+
+            <div class="button-row">
+              <button 
+                mat-raised-button 
+                color="primary" 
+                type="submit"
+                [disabled]="!addressForm.valid">
+                Cím mentése
+              </button>
+            </div>
+          </form>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-dialog-content>
+</div>

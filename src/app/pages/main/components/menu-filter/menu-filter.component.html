@@ -1,0 +1,5 @@
+<mat-chip-listbox>
+    @for (filter of filters; track filter) {
+        <mat-chip-option (click)="selectFilter(filter)">{{filter}}</mat-chip-option>
+    }
+</mat-chip-listbox>

@@ -1,0 +1,63 @@
+<div class="auth-container">
+  <mat-card class="auth-card">
+    <mat-card-content>
+      <div class="logo-section">
+        <img src="logo.svg" alt="FreshFast Logo" class="logo">
+        <h1 class="title">Üdvözöljük a FreshFast-nél</h1>
+      </div>
+
+      <mat-tab-group class="auth-tabs" animationDuration="300ms">
+        <mat-tab label="Bejelentkezés">
+          <div class="tab-content">
+            <h2 class="form-title">Bejelentkezés</h2>
+
+            <form class="auth-form" [formGroup]="authForm">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" placeholder="te@valami.hu" formControlName="email">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Jelszó</mat-label>
+                <input matInput type="password" placeholder="Adja meg jelszavát" formControlName="password">
+              </mat-form-field>
+
+              <button mat-raised-button color="primary" type="submit" class="submit-btn" (click)="loginSubmit()" [disabled]="authForm.invalid">
+                Bejelentkezés
+              </button>
+            </form>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Regisztráció">
+          <div class="tab-content">
+            <h2 class="form-title">Fiók létrehozása</h2>
+
+            <form class="auth-form" [formGroup]="authForm">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Usernév</mat-label>
+                <input matInput type="text" placeholder="Az Ön userneve" formControlName="username">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" placeholder="te@valami.hu" formControlName="email">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Jelszó</mat-label>
+                <input matInput type="password" placeholder="Adja meg jelszavát" formControlName="password">
+              </mat-form-field>
+
+              <button mat-raised-button color="primary" type="submit" class="submit-btn" (click)="registerSubmit()" [disabled]="authForm.invalid">
+                Regisztráció
+              </button>
+            </form>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<button (click)="isValid()">Is Valid?</button>

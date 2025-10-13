@@ -1,0 +1,23 @@
+<div class="nav-bar">
+    <div class="logo-and-title" [class.navigation]="!isMainPage" (click)="onLogoClick()" matRipple [matRippleDisabled]="isMainPage">
+        <img src="/logo.svg" class="logo" alt="FreshFast logó">
+        <div class="titles">
+            <p class="title">FreshFast</p>
+            <p class="subtitle">Gyors és friss</p>
+        </div>
+    </div>
+    
+    <div class="right-buttons">
+        <button matBadge="{{ cartItemCount }}" class="cart-button" matRipple (click)="onShop()">
+            <mat-icon>shopping_cart</mat-icon>
+            <span class="button-text">Cart</span>
+        </button>
+        <button class="user-button" matRipple (click)="openUserProfile()">
+            <mat-icon>person</mat-icon>
+            <span class="button-text">{{ userName }}</span>
+        </button>
+        <button class="logout-button" matRipple (click)="onLogout()">
+            <mat-icon>logout</mat-icon>
+        </button>
+    </div>
+</div>

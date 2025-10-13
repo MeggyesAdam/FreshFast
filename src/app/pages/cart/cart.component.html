@@ -1,0 +1,57 @@
+<nav-bar></nav-bar>
+
+<div class="cart-container">
+  <h1 class="cart-title">Kosár</h1>
+
+  @if (cartItems.length === 0) {
+    <div class="empty-cart">
+      <mat-icon class="empty-icon">shopping_cart</mat-icon>
+      <p class="empty-message">A kosarad üres</p>
+      <p class="empty-subtitle">Adj hozzá ételeket a rendeléshez</p>
+    </div>
+  } @else {
+    <div class="cart-list">
+      @for (item of cartItems; track item.dish.id) {
+        <div class="cart-item">
+          <div class="item-header">
+            <div class="item-info">
+              <h3 class="item-name">{{ item.dish.name }}</h3>
+              <p class="item-price">{{ item.dish.price }} Ft</p>
+            </div>
+            <div class="item-subtotal">
+              <strong>{{ item.dish.price * item.quantity }} Ft</strong>
+            </div>
+          </div>
+          
+          <div class="item-footer">
+            <div class="quantity-controls">
+              <button mat-icon-button (click)="decreaseQuantity(item.dish.id)" class="quantity-btn">
+                <mat-icon>remove</mat-icon>
+              </button>
+              <span class="quantity">{{ item.quantity }}</span>
+              <button mat-icon-button (click)="increaseQuantity(item.dish.id)" class="quantity-btn">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+            
+            <button mat-icon-button (click)="removeItem(item.dish.id)" class="remove-btn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      }
+    </div>
+
+    <div class="cart-summary">
+      <div class="total-section">
+        <span class="total-label">Összesen:</span>
+        <span class="total-amount">{{ total }} Ft</span>
+      </div>
+      
+      <button mat-raised-button class="checkout-btn" (click)="checkout()">
+        Rendelés leadása
+      </button>
+    </div>
+  }
+</div>

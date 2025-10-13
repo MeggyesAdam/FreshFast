@@ -1,0 +1,78 @@
+div.page {
+    padding: 0 10vw;
+    box-sizing: border-box;
+    
+    section.menu-items {
+        margin-top: 2vw;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2vw;
+        justify-items: center;
+        max-width: 100%;
+    }
+
+    @media (max-width: 1024px) {
+        padding: 0 5vw;
+        
+        section.menu-items {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3vw;
+        }
+    }
+
+    @media (max-width: 768px) {
+        padding: 0 4vw;
+        
+        section.menu-items {
+            grid-template-columns: 1fr;
+            gap: 4vw;
+            margin-top: 4vw;
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 0 5vw;
+    }
+}
+
+dish-card {
+    width: 100%;
+    max-width: 350px;
+}
+
+header.header {
+    margin-top: 4vh;
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        margin-top: 2vh;
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 1.75rem;
+        }
+
+        p {
+            font-size: 0.9rem;
+        }
+    }
+}
+

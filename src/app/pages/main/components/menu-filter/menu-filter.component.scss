@@ -1,0 +1,23 @@
+mat-chip-listbox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-start;
+
+    @media (max-width: 768px) {
+        gap: 6px;
+        margin-top: 1rem;
+    }
+
+    @media (max-width: 480px) {
+        gap: 8px;
+        justify-content: center;
+    }
+}
+
+mat-chip-option {
+    @media (max-width: 480px) {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+}

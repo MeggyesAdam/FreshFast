@@ -1,0 +1,51 @@
+<nav-bar></nav-bar>
+<div class="dish-detail-container">
+    <button class="back-button" mat-icon-button (click)="onBack()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <div class="content-wrapper">
+        <div class="image-section">
+            <img src="hamburger.jpg" alt="{{ dish?.name }}">
+            <span class="category-badge">{{ dish?.category }}</span>
+        </div>
+
+        <div class="details-section">
+            <h1 class="dish-name">{{ dish?.name }}</h1>
+            <p class="dish-description">{{ dish?.description }}</p>
+            
+            <div class="info-row">
+                <div class="info-item">
+                    <mat-icon>local_fire_department</mat-icon>
+                    <span>{{ dish?.calories }} calories</span>
+                </div>
+            </div>
+
+            <div class="ingredients-section">
+                <h3>Ingredients</h3>
+                <div class="ingredients-grid">
+                    @for (ingredient of ingrediens; track $index) {
+                        <div class="ingredient-item">• {{ ingredient }}</div>
+                    }
+                </div>
+            </div>
+
+            <div class="quantity-section">
+                <span class="quantity-label">Quantity:</span>
+                <div class="quantity-controls">
+                    <button mat-mini-fab class="quantity-btn" (click)="modifyQuantity(-1)">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                    <span class="quantity-value">{{ quantity }}</span>
+                    <button mat-mini-fab class="quantity-btn" (click)="modifyQuantity(1)">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <button mat-flat-button class="add-to-cart-btn" (click)="onAddToCart()">
+                Kosárhoz adás - {{ currentPrice }}Ft
+            </button>
+        </div>
+    </div>
+</div>

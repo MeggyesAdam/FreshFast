@@ -1,0 +1,31 @@
+@if (dish) {
+    <mat-card (click)="onCardClick()" matRipple>
+        <div class="image-container">
+            <img src="hamburger.jpg" alt="Hamburger">
+            <span class="category-badge">{{ dish.category }}</span>
+        </div>
+        <mat-card-header>
+            <mat-card-title>{{ dish.name }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p class="description">{{ dish.description }}</p>
+            <div class="lables">
+                <div>
+                    <mat-icon class="material-icons">local_fire_department</mat-icon>
+                    <p>{{ dish.calories }} kcal</p>
+                </div>
+                <div>
+                    <mat-icon class="material-icons">no_food</mat-icon>
+                    <p>{{ dish.allergens.join(', ') }}</p>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-footer>
+            <div class="price-order">
+                <p class="price">{{ dish.price }} Ft</p>
+                <button matButton="filled" color="error" (click)="onAddToCart($event)">Megrendelés</button>
+            </div>
+        </mat-card-footer>
+    </mat-card>
+}
+    

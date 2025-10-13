@@ -1,0 +1,13 @@
+<nav-bar></nav-bar>
+<div class="page">
+    <header class="header">
+        <h1>Menünk</h1>
+        <p>Fedezze fel a friss, finom ételek választékát, amelyet közvetlenül az ajtóhoz szállítunk</p>
+        <app-menu-filter (filterSelected)="onFilterSelected($event)"></app-menu-filter>
+    </header>
+    <section class="menu-items">
+        @for (dish of filteredDishes; track $index) {
+            <dish-card [dish]="dish"></dish-card>
+        }
+    </section>
+</div>

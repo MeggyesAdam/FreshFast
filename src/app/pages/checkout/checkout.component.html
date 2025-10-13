@@ -1,0 +1,323 @@
+<div class="checkout-container">
+  <div class="checkout-header">
+    <button mat-icon-button (click)="goBack()" class="back-button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>Pénztár</h1>
+  </div>
+
+  <div class="checkout-content">
+    <div class="stepper-section">
+      <mat-stepper #stepper linear>
+        <mat-step label="Rendelés összesítő" [editable]="true">
+          <div class="step-content">
+            <h2>Rendelésed</h2>
+            <mat-list>
+              @for (item of cartItems; track item.dish.id) {
+                <mat-list-item>
+                  <div class="cart-item">
+                    <div class="item-details">
+                      <h3>{{ item.dish.name }}</h3>
+                      <p class="quantity">Mennyiség: {{ item.quantity }}</p>
+                    </div>
+                    <div class="item-price">
+                      {{ item.dish.price * item.quantity }} Ft
+                    </div>
+                  </div>
+                </mat-list-item>
+              }
+            </mat-list>
+
+            <div class="step-actions">
+              <button mat-raised-button color="primary" matStepperNext>
+                Tovább a szállításhoz
+              </button>
+            </div>
+          </div>
+        </mat-step>
+
+        <mat-step label="Szállítási cím" [stepControl]="addressFormGroup">
+          <div class="step-content">
+            <h2>Szállítási információk</h2>
+            <form [formGroup]="addressFormGroup">
+              <mat-form-field appearance="outline">
+                <mat-label>Utca és házszám</mat-label>
+                <input matInput formControlName="street" placeholder="pl. Fő utca 12." />
+                <mat-icon matPrefix>home</mat-icon>
+                @if (addressFormGroup.get('street')?.hasError('required')) {
+                  <mat-error>
+                    Az utca és házszám megadása kötelező
+                  </mat-error>
+                }
+              </mat-form-field>
+
+              <div class="form-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>Város</mat-label>
+                  <input matInput formControlName="city" placeholder="pl. Budapest" />
+                  @if (addressFormGroup.get('city')?.hasError('required')) {
+                    <mat-error>
+                      A város megadása kötelező
+                    </mat-error>
+                  }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Irányítószám</mat-label>
+                  <input matInput formControlName="postalCode" placeholder="pl. 1234" />
+                  @if (addressFormGroup.get('postalCode')?.hasError('required')) {
+                    <mat-error>
+                      Az irányítószám megadása kötelező
+                    </mat-error>
+                  }
+                  @if (addressFormGroup.get('postalCode')?.hasError('pattern')) {
+                    <mat-error>
+                      Érvénytelen irányítószám (4 számjegy)
+                    </mat-error>
+                  }
+                </mat-form-field>
+              </div>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Megye</mat-label>
+                <input matInput formControlName="county" placeholder="pl. Pest" />
+                @if (addressFormGroup.get('county')?.hasError('required')) {
+                  <mat-error>
+                    A megye megadása kötelező
+                  </mat-error>
+                }
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Telefonszám</mat-label>
+                <input matInput formControlName="phone" placeholder="+36201234567" />
+                <mat-icon matPrefix>phone</mat-icon>
+                @if (addressFormGroup.get('phone')?.hasError('required')) {
+                  <mat-error>
+                    A telefonszám megadása kötelező
+                  </mat-error>
+                }
+                @if (addressFormGroup.get('phone')?.hasError('pattern')) {
+                  <mat-error>
+                    Érvénytelen telefonszám formátum
+                  </mat-error>
+                }
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>További információk (opcionális)</mat-label>
+                <textarea
+                  matInput
+                  formControlName="additionalInfo"
+                  rows="3"
+                  placeholder="pl. Csengessen a 4-essel, Hagyja az ajtónál"
+                ></textarea>
+              </mat-form-field>
+            </form>
+
+            <div class="step-actions">
+              <button mat-button matStepperPrevious>Vissza</button>
+              <button
+                mat-raised-button
+                color="primary"
+                matStepperNext
+                [disabled]="!addressFormGroup.valid"
+              >
+                Tovább a fizetéshez
+              </button>
+            </div>
+          </div>
+        </mat-step>
+
+        <mat-step label="Fizetés" [stepControl]="paymentFormGroup">
+          <div class="step-content">
+            <h2>Fizetési mód</h2>
+            <form [formGroup]="paymentFormGroup">
+              <mat-radio-group formControlName="paymentMethod" class="payment-methods">
+                <mat-radio-button value="card">
+                  <mat-icon>credit_card</mat-icon>
+                  Bankkártya
+                </mat-radio-button>
+                <mat-radio-button value="cash">
+                  <mat-icon>payments</mat-icon>
+                  Utánvéttel készpénz
+                </mat-radio-button>
+              </mat-radio-group>
+
+              @if (paymentFormGroup.get('paymentMethod')?.value === 'card') {
+                <div class="card-details">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Kártyaszám</mat-label>
+                    <input matInput formControlName="cardNumber" placeholder="1234567812345678" />
+                    <mat-icon matPrefix>credit_card</mat-icon>
+                    @if (paymentFormGroup.get('cardNumber')?.hasError('required')) {
+                      <mat-error>
+                        A kártyaszám megadása kötelező
+                      </mat-error>
+                    }
+                    @if (paymentFormGroup.get('cardNumber')?.hasError('pattern')) {
+                      <mat-error>
+                        Érvénytelen kártyaszám (16 számjegy)
+                      </mat-error>
+                    }
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline">
+                    <mat-label>Kártyatulajdonos neve</mat-label>
+                    <input matInput formControlName="cardName" placeholder="KOVÁCS JÁNOS" />
+                    @if (paymentFormGroup.get('cardName')?.hasError('required')) {
+                      <mat-error>
+                        A kártyatulajdonos nevének megadása kötelező
+                      </mat-error>
+                    }
+                  </mat-form-field>
+
+                  <div class="form-row">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Lejárati dátum</mat-label>
+                      <input matInput formControlName="expiryDate" placeholder="HH/ÉÉ" />
+                      @if (paymentFormGroup.get('expiryDate')?.hasError('required')) {
+                        <mat-error>
+                          A lejárati dátum megadása kötelező
+                        </mat-error>
+                      }
+                      @if (paymentFormGroup.get('expiryDate')?.hasError('pattern')) {
+                        <mat-error>
+                          Érvénytelen formátum (HH/ÉÉ)
+                        </mat-error>
+                      }
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                      <mat-label>CVV</mat-label>
+                      <input matInput formControlName="cvv" placeholder="123" type="password" />
+                      @if (paymentFormGroup.get('cvv')?.hasError('required')) {
+                        <mat-error>
+                          A CVV kód megadása kötelező
+                        </mat-error>
+                      }
+                      @if (paymentFormGroup.get('cvv')?.hasError('pattern')) {
+                        <mat-error>
+                          Érvénytelen CVV (3 számjegy)
+                        </mat-error>
+                      }
+                    </mat-form-field>
+                  </div>
+                </div>
+              }
+
+              @if (paymentFormGroup.get('paymentMethod')?.value === 'cash') {
+                <div class="cash-payment-info">
+                  <mat-icon>info</mat-icon>
+                  <p>Készpénzzel fogsz fizetni a kiszállításkor. Kérjük, tartsd készenlétben a pontos összeget.</p>
+                </div>
+              }
+            </form>
+
+            <div class="step-actions">
+              <button mat-button matStepperPrevious>Vissza</button>
+              <button mat-raised-button color="primary" matStepperNext [disabled]="!paymentFormGroup.valid">
+                Rendelés áttekintése
+              </button>
+            </div>
+          </div>
+        </mat-step>
+
+        <mat-step label="Áttekintés és megerősítés">
+          <div class="step-content">
+            <h2>Rendelés megerősítése</h2>
+
+            <div class="review-section">
+              <h3>Szállítási cím</h3>
+              <p>
+                {{ addressFormGroup.get('street')?.value }},
+                {{ addressFormGroup.get('city')?.value }}
+                {{ addressFormGroup.get('postalCode')?.value }},
+                {{ addressFormGroup.get('county')?.value }}
+              </p>
+              <p><strong>Telefon:</strong> {{ addressFormGroup.get('phone')?.value }}</p>
+              @if (addressFormGroup.get('additionalInfo')?.value) {
+                <p>
+                  <strong>Megjegyzés:</strong> {{ addressFormGroup.get('additionalInfo')?.value }}
+                </p>
+              }
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="review-section">
+              <h3>Fizetési mód</h3>
+              @if (paymentFormGroup.get('paymentMethod')?.value === 'card') {
+                <p>
+                  <mat-icon>credit_card</mat-icon>
+                  Bankkártya végződés:
+                  {{ paymentFormGroup.get('cardNumber')?.value?.slice(-4) }}
+                </p>
+              }
+              @if (paymentFormGroup.get('paymentMethod')?.value === 'cash') {
+                <p>
+                  <mat-icon>payments</mat-icon>
+                  Utánvéttel készpénz
+                </p>
+              }
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="review-section">
+              <h3>Rendelt termékek</h3>
+              <mat-list>
+                @for (item of cartItems; track item.dish.id) {
+                  <mat-list-item>
+                    <div class="cart-item">
+                      <div class="item-details">
+                        <span>{{ item.dish.name }} × {{ item.quantity }}</span>
+                      </div>
+                      <div class="item-price">{{ item.dish.price * item.quantity }} Ft</div>
+                    </div>
+                  </mat-list-item>
+                }
+              </mat-list>
+            </div>
+
+            <div class="step-actions">
+              <button mat-button matStepperPrevious>Vissza</button>
+              <button mat-raised-button color="primary" (click)="placeOrder()">
+                <mat-icon>check_circle</mat-icon>
+                Rendelés leadása
+              </button>
+            </div>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </div>
+
+    <div class="summary-section">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Rendelés összesítő</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="summary-row">
+            <span>Részösszeg</span>
+            <span>{{ getSubtotal() }} Ft</span>
+          </div>
+          <div class="summary-row">
+            <span>Szállítási díj</span>
+            <span>{{ getDeliveryFee() }} Ft</span>
+          </div>
+          <mat-divider></mat-divider>
+          <div class="summary-row total">
+            <span><strong>Összesen</strong></span>
+            <span><strong>{{ getTotal() }} Ft</strong></span>
+          </div>
+
+          <div class="estimated-time">
+            <mat-icon>schedule</mat-icon>
+            <span>Becsült szállítási idő: 30-45 perc</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
