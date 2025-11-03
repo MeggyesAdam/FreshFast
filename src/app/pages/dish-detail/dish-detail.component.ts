@@ -5,6 +5,7 @@ import { Dish } from '../../models/food-interface';
 import { MatButtonModule } from "@angular/material/button";
 import {MatIconModule} from '@angular/material/icon';
 import { NavBarComponent } from '../../components/nav-bar/nav-bar.component';
+import { CartService } from '../../services/cart-service';
 
 @Component({
   selector: 'app-dish-detail',
@@ -13,7 +14,7 @@ import { NavBarComponent } from '../../components/nav-bar/nav-bar.component';
   styleUrl: './dish-detail.component.scss'
 })
 export class DishDetailComponent {
-  constructor(private route: ActivatedRoute, private router: Router, private dataService: DataService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private dataService: DataService, private cartService: CartService) {}
   dishId: number | null = null;
   dish : Dish | null = null;
   allergens: string[] = [];
@@ -42,7 +43,7 @@ export class DishDetailComponent {
 
   onAddToCart() {
     if (this.dish) {
-      this.dataService.addToCart(this.dish, this.quantity);
+      this.cartService.addToCart(this.dish, this.quantity);
     }
   }
 

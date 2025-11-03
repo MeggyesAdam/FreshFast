@@ -15,6 +15,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { DataService } from '../../services/data-service';
 import { CartItem } from '../../models/cart-item-interface';
 import { User } from '../../models/user-interface';
+import { CartService } from '../../services/cart-service';
 
 @Component({
   selector: 'app-checkout',
@@ -44,12 +45,13 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
+    private cartService: CartService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    this.cartItems = this.dataService.getCartItems();
+    this.cartItems = this.cartService.getCartItems();
     this.user = this.dataService.getUser();
 
     if (this.cartItems.length === 0) {
@@ -88,7 +90,7 @@ export class CheckoutComponent implements OnInit {
   placeOrder(): void {
     if (this.addressFormGroup.valid && this.paymentFormGroup.valid) {
       this.snackBar.open('Rendelés sikeresen leadva!', 'Bezárás', { duration: 5000 });
-      this.dataService.clearCart();
+      this.cartService.clearCart();
       this.router.navigate(['/main']);
     } else {
       this.snackBar.open('Kérjük, töltsd ki az összes kötelező mezőt', 'Bezárás', { duration: 3000 });

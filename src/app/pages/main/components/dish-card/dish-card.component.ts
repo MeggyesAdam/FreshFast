@@ -6,6 +6,7 @@ import { Dish } from '../../../../models/food-interface';
 import { Router } from '@angular/router';
 import { MatRippleModule } from '@angular/material/core';
 import { DataService } from '../../../../services/data-service';
+import { CartService } from '../../../../services/cart-service';
 
 @Component({
   selector: 'dish-card',
@@ -16,14 +17,14 @@ import { DataService } from '../../../../services/data-service';
 export class DishCardComponent {
   @Input() dish?: Dish;
 
-  constructor(private router: Router, private dataService: DataService) {}
+  constructor(private router: Router, private dataService: DataService, private cartService: CartService) {}
 
   onAddToCart(event?: Event) {
     if (event) {
       event.stopPropagation();
     }
     if (this.dish) {
-      this.dataService.addToCart(this.dish);
+      this.cartService.addToCart(this.dish);
       console.log('Added to cart:', this.dish.name);
     }
   }

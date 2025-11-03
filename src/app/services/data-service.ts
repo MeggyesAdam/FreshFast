@@ -8,7 +8,6 @@ import { CartItem } from '../models/cart-item-interface';
 })
 export class DataService {
   private user: User | null = null;
-  private cartItems: CartItem[] = [];
   private availableDishes: Dish[] = [
     {
       id: 1,
@@ -122,7 +121,6 @@ export class DataService {
     },
   ];
 
-
   public getDishes(): Dish[] {
     return this.availableDishes;
   }
@@ -133,46 +131,6 @@ export class DataService {
 
   public getUser(): User | null {
     return this.user;
-  }
-
-  public addToCart(dish: Dish, quantity: number = 1): void {
-    const existingItem = this.cartItems.find(item => item.dish.id === dish.id);
-    if (existingItem) {
-      existingItem.quantity += quantity;
-    } else {
-      this.cartItems.push({ dish, quantity });
-    }
-  }
-
-  public removeFromCart(dishId: number): void {
-    this.cartItems = this.cartItems.filter(item => item.dish.id !== dishId);
-  }
-
-  public updateCartItemQuantity(dishId: number, quantity: number): void {
-    const item = this.cartItems.find(item => item.dish.id === dishId);
-    if (item) {
-      if (quantity <= 0) {
-        this.removeFromCart(dishId);
-      } else {
-        item.quantity = quantity;
-      }
-    }
-  }
-
-  public getCartItems(): CartItem[] {
-    return this.cartItems;
-  }
-
-  public getCartTotal(): number {
-    return this.cartItems.reduce((total, item) => total + (item.dish.price * item.quantity), 0);
-  }
-
-  public clearCart(): void {
-    this.cartItems = [];
-  }
-
-  public getCartItemCount(): number {
-    return this.cartItems.reduce((total, item) => total + item.quantity, 0);
   }
 
   public setUserAddress(address: UserAddress) {

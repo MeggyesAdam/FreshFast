@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DataService } from '../../services/data-service';
 import { UserProfileDialogComponent } from '../user-profile-dialog/user-profile-dialog.component';
+import { CartService } from '../../services/cart-service';
 
 @Component({
   selector: 'nav-bar',
@@ -20,13 +21,13 @@ export class NavBarComponent {
 
   private dialog = inject(MatDialog);
 
-  constructor(private router: Router, private dataService: DataService) {
+  constructor(private router: Router, private dataService: DataService, private cartService: CartService) {
     router.events.subscribe(() => {
       this.isMainPage = router.url === '/';
     });
 
     this.userName = this.dataService.getUser()?.username || '';
-    this.cartItemCount = this.dataService.getCartItemCount();
+    this.cartItemCount = this.cartService.getCartItemCount();
   }
 
   onLogoClick() {
